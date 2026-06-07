@@ -1,6 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import ContactForm from "./ContactForm";
 
+// MUI Icons
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import PhoneIphoneRoundedIcon from "@mui/icons-material/PhoneIphoneRounded";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
+import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
+import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
+import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
+import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
+
 function useInView(ref, options = {}) {
   const [inView, setInView] = React.useState(false);
   useEffect(() => {
@@ -17,10 +29,7 @@ function AnimatedSection({ children, className = "" }) {
   const ref = useRef();
   const inView = useInView(ref);
   return (
-    <div
-      ref={ref}
-      className={`animated-section ${inView ? "in-view" : ""} ${className}`}
-    >
+    <div ref={ref} className={`animated-section ${inView ? "in-view" : ""} ${className}`}>
       {children}
     </div>
   );
@@ -45,18 +54,16 @@ const skillColors = {
 const projects = [
   {
     title: "Web Chat Application",
-    description:
-      "Real-time chat application with public messaging and live updates using WebSockets. Built with the full MERN stack for a seamless, responsive experience.",
+    description: "Real-time chat application with public messaging and live updates using WebSockets. Built with the full MERN stack for a seamless, responsive experience.",
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "WebSockets"],
-    icon: "💬",
+    Icon: ChatBubbleOutlineRoundedIcon,
     color: "#8b5cf6",
   },
   {
     title: "Invoice Generation System",
-    description:
-      "Automated invoice generation tool with dynamic form inputs, real-time calculations, and PDF export functionality. Streamlines billing workflows efficiently.",
+    description: "Automated invoice generation tool with dynamic form inputs, real-time calculations, and PDF export functionality. Streamlines billing workflows efficiently.",
     tech: ["MySQL", "JavaScript", "Bootstrap", "HTML", "CSS"],
-    icon: "🧾",
+    Icon: ReceiptLongOutlinedIcon,
     color: "#38bdf8",
   },
 ];
@@ -96,20 +103,33 @@ const education = [
     school: "Conestoga College",
     period: "May 2023 – Aug 2024",
     cgpa: "3.84 / 4.0",
-    icon: "🎓",
+    Icon: SchoolOutlinedIcon,
   },
   {
     degree: "Bachelor of Computer Applications (BCA)",
     school: "SPU",
     period: "Jul 2019 – Apr 2022",
     cgpa: "8.48 / 10.0",
-    icon: "📚",
+    Icon: MenuBookOutlinedIcon,
   },
 ];
 
 const certifications = [
-  { name: "Microsoft Azure Fundamentals (AZ-900)", issuer: "Microsoft", icon: "☁️", color: "#38bdf8" },
-  { name: "CompTIA A+ Core 1 (220-1101)", issuer: "CompTIA", icon: "🖥️", color: "#8b5cf6" },
+  { name: "Microsoft Azure Fundamentals (AZ-900)", issuer: "Microsoft", Icon: CloudOutlinedIcon,   color: "#38bdf8" },
+  { name: "CompTIA A+ Core 1 (220-1101)",          issuer: "CompTIA",   Icon: ComputerOutlinedIcon, color: "#8b5cf6" },
+];
+
+const contactItems = [
+  { Icon: EmailOutlinedIcon,       label: "Email",    value: "rajyashraj333@gmail.com",      href: "mailto:rajyashraj333@gmail.com",               color: "#8b5cf6" },
+  { Icon: PhoneIphoneRoundedIcon,  label: "Phone",    value: "+1 (613) 661-6919",            href: "tel:+16136616919",                             color: "#38bdf8" },
+  { Icon: PlaceOutlinedIcon,       label: "Location", value: "Belleville, Ontario, Canada",  href: null,                                           color: "#34d399" },
+  { Icon: LinkedInIcon,            label: "LinkedIn", value: "linkedin.com/in/yashraj-raj",  href: "https://www.linkedin.com/in/yashraj-raj-a04166258/", color: "#0a66c2" },
+];
+
+const aboutMeta = [
+  { Icon: PlaceOutlinedIcon,      text: "Belleville, Ontario, Canada" },
+  { Icon: EmailOutlinedIcon,      text: "rajyashraj333@gmail.com" },
+  { Icon: PhoneIphoneRoundedIcon, text: "+1 (613) 661-6919" },
 ];
 
 function SectionHeader({ label, title, subtitle }) {
@@ -125,6 +145,7 @@ function SectionHeader({ label, title, subtitle }) {
 export default function MainSection() {
   return (
     <div className="main-wrapper">
+
       {/* About */}
       <section id="about" className="portfolio-section">
         <AnimatedSection>
@@ -140,13 +161,16 @@ export default function MainSection() {
                 Whether it's a real-time chat app or an enterprise-grade system, I bring dedication to every project.
               </p>
               <div className="about-meta">
-                <div className="meta-item"><span className="meta-icon">📍</span> Belleville, Ontario, Canada</div>
-                <div className="meta-item"><span className="meta-icon">📧</span> rajyashraj333@gmail.com</div>
-                <div className="meta-item"><span className="meta-icon">📱</span> +1 (613) 661-6919</div>
+                {aboutMeta.map(({ Icon, text }) => (
+                  <div key={text} className="meta-item">
+                    <Icon className="meta-icon" sx={{ fontSize: 16 }} />
+                    {text}
+                  </div>
+                ))}
               </div>
               <div className="about-actions">
                 <a href="https://www.linkedin.com/in/yashraj-raj-a04166258/" target="_blank" rel="noreferrer" className="btn-outline">LinkedIn ↗</a>
-                <a href="#contact" className="btn-outline">Portfolio ↗</a>
+                <a href="#contact" className="btn-outline">Contact ↗</a>
               </div>
             </div>
             <div className="about-card-stack">
@@ -194,16 +218,16 @@ export default function MainSection() {
         <AnimatedSection>
           <SectionHeader label="03 / PROJECTS" title="Featured Work" subtitle="Things I've built" />
           <div className="projects-grid">
-            {projects.map((project) => (
-              <div key={project.title} className="project-card" style={{ "--project-color": project.color }}>
+            {projects.map(({ title, description, tech, Icon, color }) => (
+              <div key={title} className="project-card" style={{ "--project-color": color }}>
                 <div className="project-icon-wrap">
-                  <span className="project-icon">{project.icon}</span>
+                  <Icon sx={{ fontSize: 28, color }} />
                 </div>
                 <div className="project-body">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-desc">{project.description}</p>
+                  <h3 className="project-title">{title}</h3>
+                  <p className="project-desc">{description}</p>
                   <div className="project-tech">
-                    {project.tech.map((t) => (
+                    {tech.map((t) => (
                       <span key={t} className="project-tech-tag">{t}</span>
                     ))}
                   </div>
@@ -239,9 +263,7 @@ export default function MainSection() {
                     <span className="timeline-period">{exp.period}</span>
                   </div>
                   <ul className="timeline-points">
-                    {exp.points.map((pt, j) => (
-                      <li key={j}>{pt}</li>
-                    ))}
+                    {exp.points.map((pt, j) => <li key={j}>{pt}</li>)}
                   </ul>
                 </div>
               </div>
@@ -257,15 +279,15 @@ export default function MainSection() {
           <div className="edu-cert-grid">
             <div className="edu-col">
               <h3 className="subsection-title">Education</h3>
-              {education.map((edu) => (
-                <div key={edu.degree} className="edu-card">
-                  <span className="edu-icon">{edu.icon}</span>
+              {education.map(({ degree, school, period, cgpa, Icon }) => (
+                <div key={degree} className="edu-card">
+                  <Icon className="edu-icon" sx={{ fontSize: 28, color: "#8b5cf6" }} />
                   <div>
-                    <p className="edu-degree">{edu.degree}</p>
-                    <p className="edu-school">{edu.school}</p>
+                    <p className="edu-degree">{degree}</p>
+                    <p className="edu-school">{school}</p>
                     <div className="edu-meta">
-                      <span>{edu.period}</span>
-                      <span className="edu-cgpa">CGPA: {edu.cgpa}</span>
+                      <span>{period}</span>
+                      <span className="edu-cgpa">CGPA: {cgpa}</span>
                     </div>
                   </div>
                 </div>
@@ -273,12 +295,12 @@ export default function MainSection() {
             </div>
             <div className="cert-col">
               <h3 className="subsection-title">Certifications</h3>
-              {certifications.map((cert) => (
-                <div key={cert.name} className="cert-card" style={{ "--cert-color": cert.color }}>
-                  <span className="cert-icon">{cert.icon}</span>
+              {certifications.map(({ name, issuer, Icon, color }) => (
+                <div key={name} className="cert-card" style={{ "--cert-color": color }}>
+                  <Icon className="cert-icon" sx={{ fontSize: 28, color }} />
                   <div>
-                    <p className="cert-name">{cert.name}</p>
-                    <p className="cert-issuer">{cert.issuer}</p>
+                    <p className="cert-name">{name}</p>
+                    <p className="cert-issuer">{issuer}</p>
                   </div>
                   <div className="cert-glow" />
                 </div>
@@ -293,21 +315,14 @@ export default function MainSection() {
         <AnimatedSection>
           <SectionHeader label="06 / CONTACT" title="Let's Connect" subtitle="Open to new opportunities and collaborations" />
           <div className="contact-grid">
-
-            {/* Left — info cards */}
             <div className="contact-info">
               <p className="contact-intro">
                 I'm currently open to full-time roles, freelance projects, and exciting collaborations.
                 Drop me a message and I'll reply within 48 hours.
               </p>
-              {[
-                { icon: "📧", label: "Email",    value: "rajyashraj333@gmail.com",        href: "mailto:rajyashraj333@gmail.com" },
-                { icon: "📱", label: "Phone",    value: "+1 (613) 661-6919",              href: "tel:+16136616919" },
-                { icon: "📍", label: "Location", value: "Belleville, Ontario, Canada",    href: null },
-                { icon: "💼", label: "LinkedIn", value: "linkedin.com/in/yashraj-raj",    href: "https://www.linkedin.com/in/yashraj-raj-a04166258/" },
-              ].map(({ icon, label, value, href }) => (
+              {contactItems.map(({ Icon, label, value, href, color }) => (
                 <div key={label} className="contact-card">
-                  <span className="contact-icon">{icon}</span>
+                  <Icon className="contact-icon" sx={{ fontSize: 22, color }} />
                   <div>
                     <p className="contact-label">{label}</p>
                     {href
@@ -318,16 +333,12 @@ export default function MainSection() {
                   <div className="contact-card-shine" />
                 </div>
               ))}
-
               <div className="contact-availability">
                 <span className="avail-dot" />
                 Available for new opportunities
               </div>
             </div>
-
-            {/* Right — EmailJS form */}
             <ContactForm />
-
           </div>
         </AnimatedSection>
       </section>
