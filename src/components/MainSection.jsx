@@ -145,7 +145,7 @@ export default function MainSection() {
                 <div className="meta-item"><span className="meta-icon">📱</span> +1 (613) 661-6919</div>
               </div>
               <div className="about-actions">
-                <a href="https://www.linkedin.com/in/yashraj-raj" target="_blank" rel="noreferrer" className="btn-outline">LinkedIn ↗</a>
+                <a href="https://www.linkedin.com/in/yashraj-raj-a04166258/" target="_blank" rel="noreferrer" className="btn-outline">LinkedIn ↗</a>
                 <a href="#contact" className="btn-outline">Portfolio ↗</a>
               </div>
             </div>
