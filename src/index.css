@@ -276,7 +276,7 @@ body {
   font-size: 0.9rem;
 }
 
-.meta-icon { font-size: 1rem; }
+.meta-icon { flex-shrink: 0; color: var(--muted); display: flex !important; }
 
 .about-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
 
@@ -561,7 +561,7 @@ body {
 }
 .edu-card:hover { transform: translateY(-3px); }
 
-.edu-icon { font-size: 1.6rem; flex-shrink: 0; }
+.edu-icon { flex-shrink: 0; display: flex !important; }
 
 .edu-degree {
   font-weight: 700;
@@ -607,7 +607,7 @@ body {
   pointer-events: none;
 }
 
-.cert-icon { font-size: 1.8rem; flex-shrink: 0; }
+.cert-icon { flex-shrink: 0; display: flex !important; }
 
 .cert-name { font-weight: 700; color: #fff; font-size: 0.9rem; margin: 0 0 4px; }
 
@@ -657,7 +657,7 @@ body {
 }
 .contact-card:hover .contact-card-shine { transform: translateX(100%); }
 
-.contact-icon { font-size: 1.4rem; flex-shrink: 0; }
+.contact-icon { flex-shrink: 0; display: flex !important; }
 .contact-label { color: var(--muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 2px; }
 .contact-value {
   color: #e2e8f0; font-size: 0.88rem; text-decoration: none;
@@ -757,7 +757,8 @@ a.contact-value:hover { color: var(--blue); }
   transition: color 0.2s;
 }
 .cf-field--focused .cf-label { color: #a78bfa; }
-.cf-label-icon { font-size: 0.85rem; }
+.cf-field--focused .cf-label .cf-label-icon { color: #a78bfa !important; }
+.cf-label-icon { font-size: 0.85rem; color: var(--muted); display: flex !important; align-items: center; transition: color 0.2s; }
 
 .cf-input-wrap { position: relative; }
 
@@ -792,12 +793,11 @@ a.contact-value:hover { color: var(--blue); }
 .cf-textarea { min-height: 120px; }
 
 .cf-check {
-  position: absolute;
+  position: absolute !important;
   right: 12px; top: 50%;
   transform: translateY(-50%);
-  color: #34d399;
-  font-size: 0.85rem;
-  font-weight: 700;
+  color: #34d399 !important;
+  pointer-events: none;
 }
 .cf-char-count {
   position: absolute;
@@ -877,6 +877,7 @@ a.contact-value:hover { color: var(--blue); }
   font-weight: 600;
   animation: fadeSlideUp 0.4s ease;
 }
+.cf-success-banner svg { flex-shrink: 0; color: #34d399; }
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
