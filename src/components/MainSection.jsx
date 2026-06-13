@@ -12,6 +12,9 @@ import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 function useInView(ref, options = {}) {
   const [inView, setInView] = React.useState(false);
@@ -53,11 +56,22 @@ const skillColors = {
 
 const projects = [
   {
+    title: "PaySlice",
+    description: "A modern bill-splitting web app that lets groups divide expenses fairly and track who owes what in real time. Built with a clean UI and seamless UX for shared payments.",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    Icon: AccountBalanceWalletOutlinedIcon,
+    color: "#34d399",
+    liveUrl: "https://payslice-mu.vercel.app/",
+    githubUrl: null,
+  },
+  {
     title: "Web Chat Application",
     description: "Real-time chat application with public messaging and live updates using WebSockets. Built with the full MERN stack for a seamless, responsive experience.",
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "WebSockets"],
     Icon: ChatBubbleOutlineRoundedIcon,
     color: "#8b5cf6",
+    liveUrl: "https://gc-o1wg.onrender.com/",
+    githubUrl: null,
   },
   {
     title: "Invoice Generation System",
@@ -65,6 +79,8 @@ const projects = [
     tech: ["MySQL", "JavaScript", "Bootstrap", "HTML", "CSS"],
     Icon: ReceiptLongOutlinedIcon,
     color: "#38bdf8",
+    liveUrl: null,
+    githubUrl: "https://github.com/yv18/poptospizza",
   },
 ];
 
@@ -218,7 +234,7 @@ export default function MainSection() {
         <AnimatedSection>
           <SectionHeader label="03 / PROJECTS" title="Featured Work" subtitle="Things I've built" />
           <div className="projects-grid">
-            {projects.map(({ title, description, tech, Icon, color }) => (
+            {projects.map(({ title, description, tech, Icon, color, liveUrl, githubUrl }) => (
               <div key={title} className="project-card" style={{ "--project-color": color }}>
                 <div className="project-icon-wrap">
                   <Icon sx={{ fontSize: 28, color }} />
@@ -231,6 +247,20 @@ export default function MainSection() {
                       <span key={t} className="project-tech-tag">{t}</span>
                     ))}
                   </div>
+                </div>
+                <div className="project-links">
+                  {liveUrl && (
+                    <a href={liveUrl} target="_blank" rel="noreferrer" className="project-link project-link--live">
+                      <OpenInNewRoundedIcon sx={{ fontSize: 15 }} />
+                      Live Demo
+                    </a>
+                  )}
+                  {githubUrl && (
+                    <a href={githubUrl} target="_blank" rel="noreferrer" className="project-link project-link--github">
+                      <GitHubIcon sx={{ fontSize: 15 }} />
+                      GitHub
+                    </a>
+                  )}
                 </div>
                 <div className="project-glow" />
               </div>
