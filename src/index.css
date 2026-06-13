@@ -435,6 +435,50 @@ body {
   letter-spacing: 0.04em;
 }
 
+.project-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+
+.project-link--live {
+  background: rgba(52,211,153,0.12);
+  border: 1px solid rgba(52,211,153,0.35);
+  color: #34d399;
+}
+.project-link--live:hover {
+  background: rgba(52,211,153,0.22);
+  border-color: rgba(52,211,153,0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(52,211,153,0.2);
+}
+
+.project-link--github {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #cbd5e1;
+}
+.project-link--github:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
 /* ──────────── TIMELINE ──────────── */
 .timeline { display: flex; flex-direction: column; gap: 0; }
 
