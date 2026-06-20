@@ -70,7 +70,7 @@ const projects = [
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "WebSockets"],
     Icon: ChatBubbleOutlineRoundedIcon,
     color: "#8b5cf6",
-    liveUrl: "https://gc-o1wg.onrender.com/",
+    liveUrl: "https://groupchatv1-1.onrender.com/",
     githubUrl: null,
   },
   {
