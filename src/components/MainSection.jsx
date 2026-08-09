@@ -89,7 +89,7 @@ const experiences = [
     role: "Technical Support Specialist, Tier II",
     company: "Concentrix",
     location: "Belleville, ON",
-    period: "Jun 2025 – Present",
+    period: "Jun 2024 – Jul 2026",
     color: "#8b5cf6",
     points: [
       "Delivered Tier II technical support for hardware, software, networking, and account issues via phone, chat, and remote sessions — leveraging Azure cloud knowledge to assist enterprise clients.",
@@ -99,10 +99,10 @@ const experiences = [
     ],
   },
   {
-    role: "Intern Software Engineer",
+    role: "Junior Software Engineer",
     company: "Tridhya Tech Limited",
     location: "Ahmedabad, Gujarat, IN",
-    period: "Jul 2022 – Dec 2022",
+    period: "Jan 2022 – Apr 2023",
     color: "#38bdf8",
     points: [
       "Developed and maintained full stack web applications using JavaScript, PHP, and MySQL; contributed to 3+ production features.",
@@ -138,12 +138,12 @@ const certifications = [
 const contactItems = [
   { Icon: EmailOutlinedIcon,       label: "Email",    value: "rajyashraj333@gmail.com",      href: "mailto:rajyashraj333@gmail.com",               color: "#8b5cf6" },
   { Icon: PhoneIphoneRoundedIcon,  label: "Phone",    value: "+1 (613) 661-6919",            href: "tel:+16136616919",                             color: "#38bdf8" },
-  { Icon: PlaceOutlinedIcon,       label: "Location", value: "Belleville, Ontario, Canada",  href: null,                                           color: "#34d399" },
+  { Icon: PlaceOutlinedIcon,       label: "Location", value: "Ontario, Canada",  href: null,                                           color: "#34d399" },
   { Icon: LinkedInIcon,            label: "LinkedIn", value: "linkedin.com/in/yashraj-raj",  href: "https://www.linkedin.com/in/yashraj-raj-a04166258/", color: "#0a66c2" },
 ];
 
 const aboutMeta = [
-  { Icon: PlaceOutlinedIcon,      text: "Belleville, Ontario, Canada" },
+  { Icon: PlaceOutlinedIcon,      text: "Ontario, Canada" },
   { Icon: EmailOutlinedIcon,      text: "rajyashraj333@gmail.com" },
   { Icon: PhoneIphoneRoundedIcon, text: "+1 (613) 661-6919" },
 ];
@@ -169,7 +169,7 @@ export default function MainSection() {
           <div className="about-grid">
             <div className="about-text">
               <p>
-                I'm a results-driven <span className="highlight">Full Stack Developer</span> based in Belleville, ON,
+                I'm a results-driven <span className="highlight">Full Stack Developer</span> based in ON, CAN,
                 with hands-on experience building scalable MERN stack applications, RESTful APIs, and responsive interfaces.
               </p>
               <p>
@@ -348,7 +348,7 @@ export default function MainSection() {
             <div className="contact-info">
               <p className="contact-intro">
                 I'm currently open to full-time roles, freelance projects, and exciting collaborations.
-                Drop me a message and I'll reply within 48 hours.
+                Drop me a message and I'll reply within 6 hours.
               </p>
               {contactItems.map(({ Icon, label, value, href, color }) => (
                 <div key={label} className="contact-card">
@@ -363,10 +363,7 @@ export default function MainSection() {
                   <div className="contact-card-shine" />
                 </div>
               ))}
-              <div className="contact-availability">
-                <span className="avail-dot" />
-                Available for new opportunities
-              </div>
+              
             </div>
             <ContactForm />
           </div>
@@ -376,7 +373,7 @@ export default function MainSection() {
       {/* Footer */}
       <footer className="portfolio-footer">
         <p>Designed & Built by <span className="highlight">Yashraj Raj</span> · Full Stack Developer</p>
-        <p className="footer-sub">Belleville, ON · 2025</p>
+        <p className="footer-sub"> ON, CAN · 2023</p>
       </footer>
     </div>
   );

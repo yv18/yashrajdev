@@ -17,10 +17,6 @@ function HeroSection() {
 
   return (
     <div ref={textRef} className=" mt-5 hero-content">
-      <div className="hero-badge">
-        <span className="hero-badge-dot" />
-        Available for opportunities
-      </div>
 
       <p className="hero-greeting">
         Hey, I'm{" "}
