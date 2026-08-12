@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import LogoIcon from "./LogoIcon";
+import LogoIcon from "./LogoIcon.js";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -70,7 +70,7 @@ export default function Navbar() {
                 fontFamily: "'Syne', sans-serif",
               }}>Yashraj Raj</div>
               <div style={{ fontSize: "0.68rem", color: "#64748b", letterSpacing: "0.1em" }}>
-                FULL STACK DEVELOPER
+                SOFTWARE ENGINEER
               </div>
             </div>
           </div>

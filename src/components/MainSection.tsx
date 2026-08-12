@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import ContactForm from "./ContactForm";
+import ContactForm from "./ContactForm.js";
 
 // MUI Icons
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
@@ -15,8 +15,12 @@ import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import LoopRoundedIcon from "@mui/icons-material/LoopRounded";
+import BugReportOutlinedIcon from "@mui/icons-material/BugReportOutlined";
+import ApiRoundedIcon from "@mui/icons-material/ApiRounded";
+import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 
-function useInView(ref, options = {}) {
+function useInView(ref: React.RefObject<HTMLElement | null>, options: IntersectionObserverInit = {}) {
   const [inView, setInView] = React.useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -28,8 +32,8 @@ function useInView(ref, options = {}) {
   return inView;
 }
 
-function AnimatedSection({ children, className = "" }) {
-  const ref = useRef();
+function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref);
   return (
     <div ref={ref} className={`animated-section ${inView ? "in-view" : ""} ${className}`}>
@@ -39,19 +43,25 @@ function AnimatedSection({ children, className = "" }) {
 }
 
 const skills = {
-  Languages: ["JavaScript (ES6+)", "TypeScript", "Python", "Java", "C#", "HTML5", "CSS3"],
-  Frontend: ["React.js", "Next.js", "Redux", "Tailwind CSS", "Responsive Design"],
-  Backend: ["Node.js", "Express.js", "REST APIs", "JWT Auth", "Firebase"],
-  Databases: ["MongoDB", "MySQL", "PostgreSQL"],
-  "DevOps & Cloud": ["Docker", "CI/CD", "Git", "GitHub", "Microsoft Azure"],
+  Languages: ["Python", "JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "C#", "VB.NET"],
+  "Software Engineering": ["Data Structures & Algorithms", "OOP", "Unit & Component Testing", "Integration Testing", "SDLC", "Code Reviews", "Performance Optimization"],
+  "APIs & Backend": ["Node.js", "Express.js", "RESTful APIs", "GraphQL", "Middleware", "JWT Authentication", "OAuth"],
+  "Security & Access Control": ["Secure Coding", "Role-Based Access Control (RBAC)", "Authorization", "Access Governance", "Security Validation"],
+  Databases: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Database Design", "Query Optimization"],
+  "Cloud & DevOps": ["AWS", "Microsoft Azure", "Docker", "CI/CD", "GitHub Actions", "Railway", "Vercel"],
+  "Testing & Quality": ["Unit Testing", "API Testing (Postman)", "Defect Resolution", "Performance Testing", "Test Documentation"],
+  "Engineering Practices": ["Agile", "Scrum", "Version Control (Git/GitHub)", "Technical Documentation", "AI-Assisted Development"],
 };
 
-const skillColors = {
+const skillColors: Record<string, string> = {
   Languages: "#8b5cf6",
-  Frontend: "#38bdf8",
-  Backend: "#34d399",
-  Databases: "#f97316",
-  "DevOps & Cloud": "#e879f9",
+  "Software Engineering": "#38bdf8",
+  "APIs & Backend": "#34d399",
+  "Security & Access Control": "#f97316",
+  Databases: "#e879f9",
+  "Cloud & DevOps": "#2dd4bf",
+  "Testing & Quality": "#fbbf24",
+  "Engineering Practices": "#fb7185",
 };
 
 const projects = [
@@ -86,53 +96,84 @@ const projects = [
 
 const experiences = [
   {
-    role: "Technical Support Specialist, Tier II",
-    company: "Concentrix",
-    location: "Belleville, ON",
-    period: "Jun 2024 – Jul 2026",
+    role: "Full Stack Engineer",
+    company: "MyTripMatch",
+    location: "Remote · Part-Time",
+    period: "Jul 2026 – Present",
     color: "#8b5cf6",
     points: [
-      "Delivered Tier II technical support for hardware, software, networking, and account issues via phone, chat, and remote sessions — leveraging Azure cloud knowledge to assist enterprise clients.",
-      "Diagnosed and resolved complex technical problems, maintaining high customer satisfaction scores and SLA compliance.",
-      "Escalated critical incidents with proper documentation; utilized ticketing systems to manage and track cases efficiently.",
-      "Maintained detailed records of troubleshooting steps, contributing to a growing internal knowledge base.",
+      "Design, develop, and maintain full-stack application features using React.js, JavaScript, Node.js, Express.js, and RESTful APIs, following documented architecture and deployment patterns.",
+      "Build responsive, reusable frontend components and integrate them with backend REST APIs to support data-driven application workflows.",
+      "Develop and enhance backend services, authentication workflows, and business logic; perform unit and component testing to validate functionality before release.",
+      "Troubleshoot application defects and backend errors through structured debugging and root-cause analysis, escalating and documenting findings as needed.",
+      "Use Git/GitHub for version control and follow Agile/SDLC practices, contributing to code quality, documentation, and continuous improvement.",
+    ],
+  },
+  {
+    role: "Software Developer I",
+    company: "Micro1",
+    location: "Remote · Contract",
+    period: "Sep 2025 – Feb 2026",
+    color: "#38bdf8",
+    points: [
+      "Developed custom full-stack web applications for business clients using React.js, Node.js, Express.js, MongoDB, and RESTful APIs, translating business requirements into technical specifications.",
+      "Built an Inventory Management System supporting inventory tracking, billing, invoice generation, and PDF export, including secure REST APIs for core business modules.",
+      "Implemented JWT authentication and role-based authorization to protect application resources and enforce access control.",
+      "Integrated online payment workflows with transaction validation and error handling; optimized database queries to improve responsiveness and reliability.",
+      "Performed debugging, software testing, and defect resolution throughout the delivery lifecycle; deployed applications to production and configured hosting/CI-CD settings.",
+      "Followed Agile development, code review, and SDLC practices, and maintained technical documentation covering implementation, testing, and deployment.",
+    ],
+  },
+  {
+    role: "Technical Support Specialist, Tier II",
+    company: "Concentrix",
+    location: "Belleville, ON · Full-Time",
+    period: "Jun 2024 – Jul 2026",
+    color: "#34d399",
+    points: [
+      "Provided Tier II technical support and advanced troubleshooting for software, application, account, and system-related issues, analyzing incidents and implementing resolution procedures.",
+      "Diagnosed software and system defects, escalating complex incidents to appropriate technical teams and following structured incident-management workflows.",
+      "Maintained detailed technical documentation, troubleshooting procedures, and resolution notes; identified recurring issues and contributed to process improvements.",
+      "Communicated technical information clearly to users, technical teams, and internal stakeholders while maintaining service quality and operational standards.",
     ],
   },
   {
     role: "Junior Software Engineer",
     company: "Tridhya Tech Limited",
-    location: "Ahmedabad, Gujarat, IN",
-    period: "Jan 2022 – Apr 2023",
-    color: "#38bdf8",
+    location: "Ahmedabad, Gujarat, IN · Full-Time",
+    period: "Mar 2022 – Apr 2023",
+    color: "#f97316",
     points: [
-      "Developed and maintained full stack web applications using JavaScript, PHP, and MySQL; contributed to 3+ production features.",
-      "Integrated REST APIs and managed relational databases for dynamic, data-driven web applications.",
-      "Collaborated with senior developers in an Agile environment to debug, test, and optimize application performance.",
-      "Improved UI/UX responsiveness across devices by standardizing CSS best practices.",
+      "Developed and maintained web application features using JavaScript, HTML5, CSS3, REST APIs, and database operations, collaborating with senior engineers on requirements analysis.",
+      "Developed and integrated RESTful APIs supporting application features and communication between frontend and backend services.",
+      "Participated in debugging, testing, defect resolution, and code reviews, investigating issues and implementing changes to improve reliability and performance.",
+      "Used Git for source control and worked within Agile/Scrum and SDLC methodologies to deliver assigned application features.",
     ],
   },
 ];
 
 const education = [
   {
-    degree: "Post Graduation in Web Development",
-    school: "Conestoga College",
+    degree: "Post-Graduate Diploma, Web Development",
+    school: "Conestoga College, Canada",
     period: "May 2023 – Aug 2024",
-    cgpa: "3.84 / 4.0",
     Icon: SchoolOutlinedIcon,
   },
   {
     degree: "Bachelor of Computer Applications (BCA)",
-    school: "SPU",
+    school: "Sardar Patel University, India",
     period: "Jul 2019 – Apr 2022",
-    cgpa: "8.48 / 10.0",
     Icon: MenuBookOutlinedIcon,
   },
 ];
 
 const certifications = [
-  { name: "Microsoft Azure Fundamentals (AZ-900)", issuer: "Microsoft", Icon: CloudOutlinedIcon,   color: "#38bdf8" },
-  { name: "CompTIA A+ Core 1 (220-1101)",          issuer: "CompTIA",   Icon: ComputerOutlinedIcon, color: "#8b5cf6" },
+  { name: "Microsoft Azure Fundamentals (AZ-900)", issuer: "Microsoft",               Icon: CloudOutlinedIcon,       color: "#38bdf8" },
+  { name: "CompTIA A+",                            issuer: "CompTIA",                 Icon: ComputerOutlinedIcon,    color: "#8b5cf6" },
+  { name: "Agile Software Development",            issuer: "Professional Training",   Icon: LoopRoundedIcon,         color: "#34d399" },
+  { name: "Software Testing & Quality Assurance",  issuer: "Professional Training",   Icon: BugReportOutlinedIcon,   color: "#f97316" },
+  { name: "REST API Development",                  issuer: "Professional Training",   Icon: ApiRoundedIcon,          color: "#e879f9" },
+  { name: "Git & Version Control",                 issuer: "Professional Training",   Icon: AccountTreeRoundedIcon,  color: "#2dd4bf" },
 ];
 
 const contactItems = [
@@ -148,7 +189,7 @@ const aboutMeta = [
   { Icon: PhoneIphoneRoundedIcon, text: "+1 (613) 661-6919" },
 ];
 
-function SectionHeader({ label, title, subtitle }) {
+function SectionHeader({ label, title, subtitle }: { label: string; title: string; subtitle?: string }) {
   return (
     <div className="section-header">
       <span className="section-label">{label}</span>
@@ -169,12 +210,14 @@ export default function MainSection() {
           <div className="about-grid">
             <div className="about-text">
               <p>
-                I'm a results-driven <span className="highlight">Full Stack Developer</span> based in ON, CAN,
-                with hands-on experience building scalable MERN stack applications, RESTful APIs, and responsive interfaces.
+                I'm a <span className="highlight">Software Engineer</span> based in ON, CAN, with 3+ years of experience
+                developing, testing, and deploying full-stack web applications and REST APIs using Python, JavaScript/TypeScript,
+                Node.js, and React.js.
               </p>
               <p>
-                I'm passionate about writing clean, maintainable code and delivering user-centric digital solutions.
-                Whether it's a real-time chat app or an enterprise-grade system, I bring dedication to every project.
+                I'm skilled in secure coding, role-based access control, unit and component testing, and CI/CD deployment
+                within Agile/SDLC environments — integrating relational and NoSQL databases and building scalable backend
+                services in a validated, review-driven workflow.
               </p>
               <div className="about-meta">
                 {aboutMeta.map(({ Icon, text }) => (
@@ -190,16 +233,16 @@ export default function MainSection() {
               </div>
             </div>
             <div className="about-card-stack">
-              <div className="stat-card" style={{ "--accent": "#8b5cf6" }}>
+              <div className="stat-card" style={{ "--accent": "#8b5cf6" } as React.CSSProperties}>
                 <span className="stat-num">3+</span>
                 <span className="stat-label">Years of Experience</span>
               </div>
-              <div className="stat-card" style={{ "--accent": "#38bdf8" }}>
-                <span className="stat-num">2+</span>
+              <div className="stat-card" style={{ "--accent": "#38bdf8" } as React.CSSProperties}>
+                <span className="stat-num">3+</span>
                 <span className="stat-label">Projects Built</span>
               </div>
-              <div className="stat-card" style={{ "--accent": "#34d399" }}>
-                <span className="stat-num">2</span>
+              <div className="stat-card" style={{ "--accent": "#34d399" } as React.CSSProperties}>
+                <span className="stat-num">6</span>
                 <span className="stat-label">Certifications</span>
               </div>
             </div>
@@ -213,7 +256,7 @@ export default function MainSection() {
           <SectionHeader label="02 / SKILLS" title="Technical Stack" subtitle="Technologies and tools I work with" />
           <div className="skills-grid">
             {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="skill-category" style={{ "--cat-color": skillColors[category] }}>
+              <div key={category} className="skill-category" style={{ "--cat-color": skillColors[category] } as React.CSSProperties}>
                 <div className="skill-category-header">
                   <span className="skill-dot" />
                   <h3>{category}</h3>
@@ -235,7 +278,7 @@ export default function MainSection() {
           <SectionHeader label="03 / PROJECTS" title="Featured Work" subtitle="Things I've built" />
           <div className="projects-grid">
             {projects.map(({ title, description, tech, Icon, color, liveUrl, githubUrl }) => (
-              <div key={title} className="project-card" style={{ "--project-color": color }}>
+              <div key={title} className="project-card" style={{ "--project-color": color } as React.CSSProperties}>
                 <div className="project-icon-wrap">
                   <Icon sx={{ fontSize: 28, color }} />
                 </div>
@@ -275,7 +318,7 @@ export default function MainSection() {
           <SectionHeader label="04 / EXPERIENCE" title="Work History" subtitle="My professional journey" />
           <div className="timeline">
             {experiences.map((exp, i) => (
-              <div key={i} className="timeline-item" style={{ "--exp-color": exp.color }}>
+              <div key={i} className="timeline-item" style={{ "--exp-color": exp.color } as React.CSSProperties}>
                 <div className="timeline-marker">
                   <div className="timeline-dot" />
                   {i < experiences.length - 1 && <div className="timeline-line" />}
@@ -309,7 +352,7 @@ export default function MainSection() {
           <div className="edu-cert-grid">
             <div className="edu-col">
               <h3 className="subsection-title">Education</h3>
-              {education.map(({ degree, school, period, cgpa, Icon }) => (
+              {education.map(({ degree, school, period, Icon }) => (
                 <div key={degree} className="edu-card">
                   <Icon className="edu-icon" sx={{ fontSize: 28, color: "#8b5cf6" }} />
                   <div>
@@ -317,7 +360,6 @@ export default function MainSection() {
                     <p className="edu-school">{school}</p>
                     <div className="edu-meta">
                       <span>{period}</span>
-                      <span className="edu-cgpa">CGPA: {cgpa}</span>
                     </div>
                   </div>
                 </div>
@@ -326,7 +368,7 @@ export default function MainSection() {
             <div className="cert-col">
               <h3 className="subsection-title">Certifications</h3>
               {certifications.map(({ name, issuer, Icon, color }) => (
-                <div key={name} className="cert-card" style={{ "--cert-color": color }}>
+                <div key={name} className="cert-card" style={{ "--cert-color": color } as React.CSSProperties}>
                   <Icon className="cert-icon" sx={{ fontSize: 28, color }} />
                   <div>
                     <p className="cert-name">{name}</p>
@@ -372,7 +414,7 @@ export default function MainSection() {
 
       {/* Footer */}
       <footer className="portfolio-footer">
-        <p>Designed & Built by <span className="highlight">Yashraj Raj</span> · Full Stack Developer</p>
+        <p>Designed & Built by <span className="highlight">Yashraj Raj</span> · Software Engineer</p>
         <p className="footer-sub"> ON, CAN · 2023</p>
       </footer>
     </div>

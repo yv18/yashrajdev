@@ -9,27 +9,47 @@ import ErrorOutlineRoundedIcon from "@mui/icons-material/ErrorOutlineRounded";
 import CelebrationOutlinedIcon from "@mui/icons-material/CelebrationOutlined";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 
+declare global {
+  interface Window {
+    emailjs?: {
+      init: (opts: { publicKey: string }) => void;
+      send: (serviceId: string, templateId: string, params: Record<string, unknown>) => Promise<unknown>;
+    };
+  }
+}
+
+interface FormValues {
+  from_name: string;
+  from_email: string;
+  subject: string;
+  message: string;
+}
+
+type FormErrors = Partial<Record<keyof FormValues, string>>;
+
 const EMAILJS_SERVICE_ID  = "service_bqaw8mi";
 const EMAILJS_TEMPLATE_ID = "template_w31uzzv";
 const EMAILJS_PUBLIC_KEY  = "PwVMQnY73wqNlen5C";
 
-const FIELDS = [
+const FIELDS: { id: keyof FormValues; label: string; type: string; placeholder: string; Icon: typeof PersonOutlineRoundedIcon }[] = [
   { id: "from_name",  label: "Your Name",  type: "text",  placeholder: "Yashraj Raj",             Icon: PersonOutlineRoundedIcon },
   { id: "from_email", label: "Your Email", type: "email", placeholder: "abc@example.com",     Icon: EmailOutlinedIcon },
   { id: "subject",    label: "Subject",    type: "text",  placeholder: "Let's work together!", Icon: LightbulbOutlinedIcon },
 ];
 
 export default function ContactForm() {
-  const [values,  setValues]  = useState({ from_name: "", from_email: "", subject: "", message: "" });
-  const [focused, setFocused] = useState(null);
-  const [status,  setStatus]  = useState("idle"); // idle | sending | success | error
-  const [touched, setTouched] = useState({});
+  const [values,  setValues]  = useState<FormValues>({ from_name: "", from_email: "", subject: "", message: "" });
+  const [focused, setFocused] = useState<keyof FormValues | null>(null);
+  const [status,  setStatus]  = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [touched, setTouched] = useState<Partial<Record<keyof FormValues, boolean>>>({});
 
-  const handleChange = (e) => setValues(v => ({ ...v, [e.target.id]: e.target.value }));
-  const handleBlur   = (e) => setTouched(t => ({ ...t, [e.target.id]: true }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setValues(v => ({ ...v, [e.target.id]: e.target.value }));
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setTouched(t => ({ ...t, [e.target.id]: true }));
 
-  const validate = () => {
-    const errs = {};
+  const validate = (): FormErrors => {
+    const errs: FormErrors = {};
     if (!values.from_name.trim())                               errs.from_name  = "Name is required";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.from_email)) errs.from_email = "Valid email required";
     if (!values.subject.trim())                                 errs.subject    = "Subject is required";
@@ -54,9 +74,9 @@ export default function ContactForm() {
           s.onerror = reject;
           document.head.appendChild(s);
         });
-        window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        window.emailjs!.init({ publicKey: EMAILJS_PUBLIC_KEY });
       }
-      await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, values);
+      await window.emailjs!.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, values as unknown as Record<string, unknown>);
       setStatus("success");
       setValues({ from_name: "", from_email: "", subject: "", message: "" });
       setTouched({});
@@ -150,7 +170,7 @@ export default function ContactForm() {
         {status === "sending" ? (
           <span className="cf-spinner" />
         ) : (
-          <btn.Icon sx={{ fontSize: 18 }} />
+          (() => { const Icon = btn.Icon; return Icon && <Icon sx={{ fontSize: 18 }} />; })()
         )}
         {btn.label}
       </button>

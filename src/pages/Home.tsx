@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import SpaceHero from "../components/SpaceHero";
-import HeroSection from "../components/HeroSection";
-import MainSection from "../components/MainSection";
+import Navbar from "../components/Navbar.js";
+import SpaceHero from "../components/SpaceHero.js";
+import HeroSection from "../components/HeroSection.js";
+import MainSection from "../components/MainSection.js";
 
 function Home() {
   return (

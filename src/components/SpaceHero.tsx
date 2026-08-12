@@ -16,8 +16,8 @@ if (typeof window !== "undefined") {
 }
 
 function RealisticSun() {
-  const sunRef = useRef();
-  const glowRef = useRef();
+  const sunRef = useRef<THREE.Mesh>(null);
+  const glowRef = useRef<THREE.Mesh>(null);
   useFrame(() => {
     if (sunRef.current) sunRef.current.rotation.y += 0.001;
     if (glowRef.current) glowRef.current.rotation.y -= 0.0005;
@@ -42,7 +42,7 @@ function RealisticSun() {
 }
 
 function Earth() {
-  const earthRef = useRef();
+  const earthRef = useRef<THREE.Mesh>(null);
   useFrame(() => { if (earthRef.current) earthRef.current.rotation.y += 0.002; });
   return (
     <mesh ref={earthRef} position={[5, 0, 0]}>
@@ -62,7 +62,7 @@ function OrbitRing() {
 }
 
 function ShootingStar({ delay = 0 }) {
-  const ref = useRef();
+  const ref = useRef<THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>>(null);
   const startX = useMemo(() => Math.random() * 26 - 6, []);
   const startY = useMemo(() => Math.random() * 8 + 4, []);
   useFrame(({ clock }) => {
@@ -87,8 +87,8 @@ function ShootingStar({ delay = 0 }) {
   );
 }
 
-function SmokeParticle({ spaceshipRef, index, movingRef }) {
-  const ref = useRef();
+function SmokeParticle({ spaceshipRef, index, movingRef }: { spaceshipRef: React.RefObject<THREE.Group | null>; index: number; movingRef: React.RefObject<boolean> }) {
+  const ref = useRef<THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>>(null);
   useFrame(({ clock }) => {
     if (!ref.current || !spaceshipRef.current) return;
     const time = clock.getElapsedTime();
@@ -113,7 +113,7 @@ function SmokeParticle({ spaceshipRef, index, movingRef }) {
 }
 
 function Spaceship() {
-  const shipRef = useRef();
+  const shipRef = useRef<THREE.Group>(null);
   const { viewport } = useThree();
 
   const smooth = useRef({ x: 0, y: 0 });

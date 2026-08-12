@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 function HeroSection() {
-  const textRef = useRef();
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = textRef.current;
@@ -24,13 +24,13 @@ function HeroSection() {
       </p>
 
       <h1 className="hero-title">
-        Full Stack<br />
-        <span className="hero-title-accent">Developer</span>
+        Software<br />
+        <span className="hero-title-accent">Engineer</span>
       </h1>
 
       <p className="hero-desc">
-        Crafting scalable MERN stack applications and beautiful web experiences.
-        Passionate about clean code, performance, and impactful digital solutions.
+        Building and deploying full-stack web applications and REST APIs with Python, JavaScript/TypeScript,
+        Node.js, and React.js. Focused on secure coding, testing, and CI/CD within Agile/SDLC environments.
       </p>
 
       <div className="hero-actions">
@@ -39,7 +39,7 @@ function HeroSection() {
       </div>
 
       <div className="hero-tech-stack">
-        {["React", "Node.js", "MongoDB", "TypeScript", "Azure"].map((tech) => (
+        {["Python", "React", "Node.js", "TypeScript", "AWS", "Azure"].map((tech) => (
           <span key={tech} className="tech-pill">{tech}</span>
         ))}
       </div>

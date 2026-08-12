@@ -34,7 +34,9 @@ const sampleMediaContent = {
   },
 };
 
-const MediaContent = ({ mediaType }) => {
+type MediaType = keyof typeof sampleMediaContent;
+
+const MediaContent = ({ mediaType }: { mediaType: MediaType }) => {
   const currentMedia = sampleMediaContent[mediaType];
 
   return (
@@ -154,7 +156,7 @@ export const ImageExpansion = () => {
 };
 
 const ScrollExpansionHeroDemo = () => {
-  const [mediaType, setMediaType] = useState('video');
+  const [mediaType, setMediaType] = useState<MediaType>('video');
   const currentMedia = sampleMediaContent[mediaType];
 
   useEffect(() => {
@@ -190,7 +192,7 @@ const ScrollExpansionHeroDemo = () => {
       <ScrollExpandMedia
         mediaType={mediaType}
         mediaSrc={currentMedia.src}
-        posterSrc={mediaType === 'video' ? currentMedia.poster : undefined}
+        posterSrc={mediaType === 'video' ? sampleMediaContent.video.poster : undefined}
         bgImageSrc={currentMedia.background}
         title={currentMedia.title}
         date={currentMedia.date}

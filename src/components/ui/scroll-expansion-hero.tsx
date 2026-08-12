@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
-/**
- * @param {Object} props
- * @param {'video'|'image'} [props.mediaType='video']
- * @param {string} props.mediaSrc
- * @param {string} [props.posterSrc]
- * @param {string} props.bgImageSrc
- * @param {string} [props.title]
- * @param {string} [props.date]
- * @param {string} [props.scrollToExpand]
- * @param {boolean} [props.textBlend]
- * @param {import('react').ReactNode} [props.children]
- */
+interface ScrollExpandMediaProps {
+  mediaType?: 'video' | 'image';
+  mediaSrc: string;
+  posterSrc?: string;
+  bgImageSrc: string;
+  title?: string;
+  date?: string;
+  scrollToExpand?: string;
+  textBlend?: boolean;
+  children?: ReactNode;
+}
+
 const ScrollExpandMedia = ({
   mediaType = 'video',
   mediaSrc,
@@ -23,14 +23,14 @@ const ScrollExpandMedia = ({
   scrollToExpand,
   textBlend,
   children,
-}) => {
+}: ScrollExpandMediaProps) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState(false);
   const [touchStartY, setTouchStartY] = useState(0);
   const [isMobileState, setIsMobileState] = useState(false);
 
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setScrollProgress(0);
@@ -39,7 +39,7 @@ const ScrollExpandMedia = ({
   }, [mediaType]);
 
   useEffect(() => {
-    const handleWheel = (e) => {
+    const handleWheel = (e: WheelEvent) => {
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
         setMediaFullyExpanded(false);
         e.preventDefault();
@@ -61,11 +61,11 @@ const ScrollExpandMedia = ({
       }
     };
 
-    const handleTouchStart = (e) => {
+    const handleTouchStart = (e: TouchEvent) => {
       setTouchStartY(e.touches[0].clientY);
     };
 
-    const handleTouchMove = (e) => {
+    const handleTouchMove = (e: TouchEvent) => {
       if (!touchStartY) return;
 
       const touchY = e.touches[0].clientY;
